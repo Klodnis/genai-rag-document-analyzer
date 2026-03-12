@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+.venv/
+genai-venv/
+
+# Data & models
+data/raw/
+*.pdf
+*.faiss
+
+# OS
+.DS_Store
+
+# PyCharm
+.idea/
