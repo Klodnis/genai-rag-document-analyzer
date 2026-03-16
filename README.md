@@ -6,21 +6,56 @@ financial PDF documents, extracts structured insights, and visualizes them.
 
 ## Key Features
 - PDF document ingestion
-- Two-stage RAG (dense retrieval + reranking)
-- Pluggable LLM strategy (open-source and OpenAI)
-- Structured data extraction
-- Data visualization (charts)
+- Semantic retrieval using embeddings and FAISS (RAG Stage 1)
+- Modular architecture for RAG, LLMs, and visualization
 - Local-first, reproducible setup
 
 ## Dataset
 Financial reports in PDF format:
-https://www.kaggle.com/datasets/gauravduttakiit/financial-reports-pdf
+https://investor.apple.com/investor-relations/default.aspx
 
-## Architecture (High Level)
-- LlamaIndex for document indexing and retrieval
-- FAISS as local vector store
-- Cross-Encoder reranking model
-- Streamlit-based local UI
+## Architecture
+
+The system follows a Retrieval-Augmented Generation (RAG) architecture:
+
+1. **Ingestion**
+   - Load PDF documents
+   - Extract raw text
+
+2. **Retrieval (RAG – Stage 1)**
+   - Split documents into overlapping text chunks
+   - Generate semantic embeddings using SentenceTransformers
+   - Store embeddings in a FAISS vector store
+   - Retrieve relevant text chunks via semantic similarity search
+
+3. **Extraction (Planned)**
+   - Use LLMs to extract structured data from retrieved text
+
+4. **Visualization (Planned)**
+   - Visualize extracted insights (charts, graphs)
+
+## Current Status
+
+- ✅ PDF ingestion and text extraction
+- ✅ Semantic retrieval using embeddings and FAISS (RAG Stage 1)
+- ⏳ Reranking with cross-encoder (planned)
+- ⏳ LLM-based structured extraction (planned)
+- ⏳ Data visualization (planned)
+
+## Project Structure
+
+```text
+src/
+  ingestion/      # PDF loading and text extraction
+  rag/            # Chunking, embeddings, vector store, retrieval
+  extraction/     # Structured data extraction (planned)
+  llm/            # LLM providers (planned)
+  visualization/  # Charts and graphs (planned)
+  app/            # Application/UI layer
+
+tests/             # Unit and integration tests
+data/              # Sample and local data (not committed)
+```
 
 ## Setup
 Instructions will be added.
