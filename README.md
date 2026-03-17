@@ -29,8 +29,10 @@ The system follows a Retrieval-Augmented Generation (RAG) architecture:
    - Retrieve relevant text chunks via semantic similarity search (Stage 1)
    - Re-rank retrieved chunks using a cross-encoder model (Stage 2)
 
-3. **Extraction (Planned)**
+3. **Extraction**
+   - Define a strict schema for financial data (Pydantic models)
    - Use LLMs to extract structured data from retrieved text
+   - Validate and normalize extracted values
 
 4. **Visualization (Planned)**
    - Visualize extracted insights (charts, graphs)
@@ -39,8 +41,8 @@ The system follows a Retrieval-Augmented Generation (RAG) architecture:
 
 - ✅ PDF ingestion and text extraction
 - ✅ Semantic retrieval using embeddings and FAISS (RAG Stage 1)
-- ✅ Reranking with cross-encoder (planned)
-- ⏳ LLM-based structured extraction (planned)
+- ✅ Reranking with cross-encoder
+- ⏳ LLM-based structured extraction (in progress)
 - ⏳ Data visualization (planned)
 
 ## Project Structure
@@ -49,7 +51,7 @@ The system follows a Retrieval-Augmented Generation (RAG) architecture:
 src/
   ingestion/      # PDF loading and text extraction
   rag/            # Chunking, embeddings, vector store, retrieval
-  extraction/     # Structured data extraction (planned)
+  extraction/     # Structured data extraction (in progress)
   llm/            # LLM providers (planned)
   visualization/  # Charts and graphs (planned)
   app/            # Application/UI layer
