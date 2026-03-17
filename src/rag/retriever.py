@@ -3,6 +3,7 @@ from typing import List
 from rag.chunker import TextChunker
 from rag.embeddings import EmbeddingService
 from rag.vector_store import VectorStore
+from rag.reranker import Reranker
 
 
 class DocumentRetriever:
@@ -13,7 +14,8 @@ class DocumentRetriever:
     def __init__(self):
         self.chunker = TextChunker()
         self.embedding_service = EmbeddingService()
-        self.vector_store: VectorStore | None = None
+        self.vector_store = None
+        self.reranker = Reranker()
 
     def index_documents(self, documents: List[str]) -> None:
         all_chunks: List[str] = []
@@ -34,3 +36,22 @@ class DocumentRetriever:
 
         query_embedding = self.embedding_service.embed([query])
         return self.vector_store.search(query_embedding, top_k)
+
+    def search_with_rerank(
+            self,
+            query: str,
+            initial_k: int = 20,
+            final_k: int = 5,
+    ):
+        """
+        Two-stage retrieval:
+        1. Dense retrieval
+        2. Cross-encoder reranking
+        """
+        initial_results = self.search(query, top_k=initial_k)
+        reranked = self.reranker.rerank(
+            query=query,
+            candidates=initial_results,
+            top_k=final_k,
+        )
+        return reranked

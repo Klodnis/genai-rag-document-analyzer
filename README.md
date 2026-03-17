@@ -6,7 +6,7 @@ financial PDF documents, extracts structured insights, and visualizes them.
 
 ## Key Features
 - PDF document ingestion
-- Semantic retrieval using embeddings and FAISS (RAG Stage 1)
+- Two-stage RAG (dense retrieval with FAISS + cross-encoder reranking)
 - Modular architecture for RAG, LLMs, and visualization
 - Local-first, reproducible setup
 
@@ -22,11 +22,12 @@ The system follows a Retrieval-Augmented Generation (RAG) architecture:
    - Load PDF documents
    - Extract raw text
 
-2. **Retrieval (RAG – Stage 1)**
+2. **Retrieval (Two-Stage RAG)**
    - Split documents into overlapping text chunks
    - Generate semantic embeddings using SentenceTransformers
    - Store embeddings in a FAISS vector store
-   - Retrieve relevant text chunks via semantic similarity search
+   - Retrieve relevant text chunks via semantic similarity search (Stage 1)
+   - Re-rank retrieved chunks using a cross-encoder model (Stage 2)
 
 3. **Extraction (Planned)**
    - Use LLMs to extract structured data from retrieved text
@@ -38,7 +39,7 @@ The system follows a Retrieval-Augmented Generation (RAG) architecture:
 
 - ✅ PDF ingestion and text extraction
 - ✅ Semantic retrieval using embeddings and FAISS (RAG Stage 1)
-- ⏳ Reranking with cross-encoder (planned)
+- ✅ Reranking with cross-encoder (planned)
 - ⏳ LLM-based structured extraction (planned)
 - ⏳ Data visualization (planned)
 
